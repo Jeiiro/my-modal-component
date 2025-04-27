@@ -52,69 +52,53 @@ function App() {
 - `onClose` (fonction) : Fonction appelée lorsque la modale est fermée.
 - `children` (node) : Contenu à afficher de la modale.
 
-## Exemple avancé
 
-```jsx
-import React, { useState } from "react";
-import Modal from "@jeiiro/react-tailwind-modal";
 
-function FormExample() {
-  const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Bonjour, ${name}!`);
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <button
-        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-        onClick={() => setOpen(true)}
-      >
-        Ouvrir le formulaire
-      </button>
-
-      <Modal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-      >
-        <h2 className="text-xl font-bold mb-4">Formulaire d'exemple</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 mb-2"
-              htmlFor="name"
-            >
-              Votre nom
-            </label>
-            <input
-              className="w-full border border-gray-300 p-2 rounded"
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <button
-            className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded w-full mb-2"
-            type="submit"
-          >
-            Envoyer
-          </button>
-        </form>
-      </Modal>
-    </>
-  );
-}
-```
 
 ## Personnalisation
 
 Le composant utilise les classes TailwindCSS pour le style. Vous pouvez personnaliser l'apparence en modifiant les classes dans votre propre implémentation.
+
+## Configuration de Tailwind CSS
+
+Pour que les styles du composant modal fonctionnent correctement dans votre projet, vous devez configurer Tailwind CSS pour inclure les classes utilisées par le composant. Ajoutez la configuration suivante à votre fichier `tailwind.config.js` :
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@jeiiro/react-tailwind-modal/**/*.{js,jsx}"
+  ],
+  safelist: [
+    'fixed',
+    'inset-0',
+    'flex',
+    'items-center',
+    'justify-center',
+    'bg-black/50',
+    'z-50',
+    'bg-white',
+    'p-6',
+    'rounded-lg',
+    'shadow-lg',
+    'max-w-md',
+    'w-full',
+    'mt-4',
+    'bg-blue-500',
+    'hover:bg-blue-600',
+    'text-white',
+    'py-2',
+    'px-4',
+    'rounded'
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
 ## Contribution
 
